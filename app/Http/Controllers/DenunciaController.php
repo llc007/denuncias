@@ -71,7 +71,7 @@ class DenunciaController extends Controller
 
         if ($request->hasFile('adjuntos')) {
             foreach ($request->file('adjuntos') as $archivo) {
-                $path = $archivo->store('adjuntos');
+                $path = $archivo->store('public/adjuntos');
                 DenunciaAdjunto::create([
                     'denuncia_id' => $denuncia->id,
                     'archivo' => $path,
@@ -128,7 +128,7 @@ class DenunciaController extends Controller
 
         if ($request->hasFile('adjuntos')) {
             foreach ($request->file('adjuntos') as $archivo) {
-                $path = $archivo->store('adjuntos');
+                $path = $archivo->store('public/adjuntos');
                 DenunciaAdjunto::create([
                     'denuncia_id' => $denuncia->id,
                     'archivo' => $path,

@@ -5,14 +5,13 @@
         </h2>
     </x-slot>
 
-
     <div class="py-12" x-data="{ tab: 'actives' }">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-{{--                    Boton crear denuncia--}}
-                    <div class="flex justify-end">
+                    <!-- Botón crear denuncia -->
+                    <div class="flex justify-end mb-4">
                         <a href="{{ route('denuncias.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Ingresar Denuncia
                         </a>
@@ -31,7 +30,6 @@
                         </li>
                     </ul>
 
-
                     <!-- Activas -->
                     <div x-show="tab === 'actives'" class="mt-6">
                         <h3 class="text-lg font-semibold mb-4">Denuncias Activas</h3>
@@ -45,7 +43,7 @@
                             </thead>
                             <tbody>
                             @foreach ($denunciasActivas as $denuncia)
-                                <tr>
+                                <tr onclick="window.location='{{ route('denuncias.show', $denuncia->id) }}'" class="cursor-pointer hover:bg-gray-100">
                                     <td class="py-2 px-4 border-b text-center">{{ $denuncia->folio }}</td>
                                     <td class="py-2 px-4 border-b text-center">{{ $denuncia->created_at->format('d-m-Y') }}</td>
                                     <td class="py-2 px-4 border-b text-center">
@@ -74,7 +72,7 @@
                             </thead>
                             <tbody>
                             @foreach ($denunciasHistorial as $denuncia)
-                                <tr>
+                                <tr onclick="window.location='{{ route('denuncias.show', $denuncia->id) }}'" class="cursor-pointer hover:bg-gray-100">
                                     <td class="py-2 px-4 border-b text-center">{{ $denuncia->folio }}</td>
                                     <td class="py-2 px-4 border-b text-center">{{ $denuncia->created_at->format('d-m-Y') }}</td>
                                     <td class="py-2 px-4 border-b text-center">

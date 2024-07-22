@@ -30,5 +30,11 @@ class Denuncia extends Model
     {
         return $this->hasMany(DenunciaAdjunto::class);
     }
+
+    public function mensajes()
+    {
+        return $this->hasMany(Mensaje::class);
+    }
+
 }
 

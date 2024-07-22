@@ -14,8 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <!-- ... otras etiquetas -->
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.0/dist/alpine.min.js" defer></script>
+
      </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -35,5 +34,6 @@
                 {{ $slot }}
             </main>
         </div>
+        <script src="//unpkg.com/alpinejs" defer></script>
     </body>
 </html>
