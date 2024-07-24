@@ -37,7 +37,7 @@
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700">Descripción del Hecho:</label>
-                                <p class="text-gray-600">{{ $denuncia->descripcion_hecho }}</p>
+                                <p>{!! nl2br(e($denuncia->descripcion_hecho)) !!}</p>
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700">Estado:</label>

@@ -7,6 +7,11 @@ use App\Models\DenunciaAdjunto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Notifications\DenunciaCreadaUsuario;
+use App\Notifications\DenunciaCreadaAdmin;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+
 
 class DenunciaController extends Controller
 {
@@ -18,8 +23,14 @@ class DenunciaController extends Controller
         $denuncias = Denuncia::all();
         //dd($denuncias);
 
-        $denunciasActivas = Denuncia::whereIn('estado', ['Nueva', 'En curso'])->get();
-        $denunciasHistorial = Denuncia::whereIn('estado', ['Finalizada', 'Descartada'])->get();
+        $denunciasActivas = Denuncia::where('estado', '!=', 'Finalizada')
+            ->where('estado', '!=', 'Descartada')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $denunciasHistorial = Denuncia::whereIn('estado', ['Finalizada', 'Descartada'])
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('denuncias.index', compact('denunciasActivas', 'denunciasHistorial'));
     }
@@ -69,6 +80,19 @@ class DenunciaController extends Controller
             'user_id' => Auth::id(),
         ]);
 
+        // Obtener el usuario autenticado
+        $user = Auth::user();
+
+        // Enviar notificación al usuario
+        if ($user) {
+            $user->notify(new DenunciaCreadaUsuario($denuncia));
+        } else {
+            // Manejar el caso en que el usuario no esté autenticado, si es necesario
+        }
+        // Notificar a los administradores
+        $admins = User::role('admin')->get();
+        Notification::send($admins, new DenunciaCreadaAdmin($denuncia));
+
         if ($request->hasFile('adjuntos')) {
             foreach ($request->file('adjuntos') as $archivo) {
                 $path = $archivo->store('public/adjuntos');
@@ -80,7 +104,7 @@ class DenunciaController extends Controller
         }
 
         return redirect()->route('denuncias.index')
-            ->with('success', 'Denuncia creada exitosamente. Guarda este folio: ' . $folio . ' y pin: ' . $pin);
+            ->with('success', 'Denuncia creada exitosamente. Guarda este folio: ' . $folio . ' y pin: ' . $pin . ' para revisar el estado de la denuncia mas adelante.');
     }
 
 

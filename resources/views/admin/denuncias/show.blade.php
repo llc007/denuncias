@@ -37,7 +37,8 @@
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700">Descripción del Hecho:</label>
-                                <p class="text-gray-600">{{ $denuncia->descripcion_hecho }}</p>
+                                <!-- En la vista de la denuncia (show.blade.php) -->
+                                <x-denuncias.descripcion :text="$denuncia->descripcion_hecho" />
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700">Estado:</label>
