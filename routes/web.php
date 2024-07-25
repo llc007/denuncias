@@ -41,7 +41,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
 
 //RUTAS DE DENUNCIAS, utilizamos un resource para crear las rutas CRUD.
-Route::resource('denuncias', DenunciaController::class);
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('denuncias', DenunciaController::class);
+});
 
 //Mensajes de estado y chat de denuncias.
 Route::resource('mensajes', MensajeController::class)->only(['store']);

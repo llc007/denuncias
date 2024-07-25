@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Notification;
 
 class DenunciaController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
