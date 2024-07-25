@@ -8,11 +8,12 @@ use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DenunciaController as AdminDenunciaController;
 
-Route::get('/', function () {
+
+Route::get('/d', function () {
     return view('auth/login');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
