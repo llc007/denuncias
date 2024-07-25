@@ -15,7 +15,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans text-gray-900 antialiased bg-gray-100">
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+<div class="mt-12 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
     <div class="flex flex-col items-center">
         <a href="/">
             <img src="{{ asset('imagenes/logoInstitucional.png') }}" alt="Large Logo" class="h-32 mb-4">

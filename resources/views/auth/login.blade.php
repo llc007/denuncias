@@ -1,3 +1,9 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+            {{ __('Canal de denuncias NHHS') }}
+        </h2>
+    </x-slot>
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')"/>
@@ -45,3 +51,4 @@
         </div>
     </form>
 </x-guest-layout>
+</x-app-layout>

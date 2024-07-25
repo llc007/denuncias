@@ -25,7 +25,8 @@ class DenunciaController extends Controller
         $denuncias = Denuncia::all();
         //dd($denuncias);
 
-        $denunciasActivas = Denuncia::where('estado', '!=', 'Finalizada')
+        $denunciasActivas = Denuncia::where('user_id',Auth::id())
+            ->where('estado', '!=', 'Finalizada')
             ->where('estado', '!=', 'Descartada')
             ->orderBy('created_at', 'desc')
             ->get();

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
+
 
 class RegisteredUserController extends Controller
 {
@@ -40,6 +42,9 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        //Se le asigna automaticamente el rol de funcionario.
+        $user->assignRole('funcionario');
 
         event(new Registered($user));
 

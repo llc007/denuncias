@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DenunciaController as AdminDenunciaController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::get('/dashboard', function () {
@@ -41,7 +41,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
 
 //RUTAS DE DENUNCIAS, utilizamos un resource para crear las rutas CRUD.
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:admin|funcionario'])->group(function () {
     Route::resource('denuncias', DenunciaController::class);
 });
 
